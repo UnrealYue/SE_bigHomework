@@ -12,8 +12,9 @@ public class ConstUtil {
     //视图常量
     public static final String BASE_RESULT_NAME = "result";
     public static final String MODEL_TOKEN_ATTRIBUTE = "token";
-    public static final String ADMIN_REDIRECT_VIEW = "redirect:book";
-    public static final String LOGIN_VIEW = "login.jsp";
+    public static final String ADMIN_REDIRECT_VIEW = "redirect:admin";
+    public static final String INDEX_VIEW = "index";
+    public static final String LOGIN_VIEW = "login";
     //public static final String
 
     //Hql常量

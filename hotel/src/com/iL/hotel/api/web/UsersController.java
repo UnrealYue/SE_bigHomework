@@ -30,7 +30,7 @@ public class UsersController {
         BaseObjectResult<UsersLoginResult> result = new BaseObjectResult<UsersLoginResult>();
         this.usersService.userLogin(username, password, result);
         if (result.isSuccess()){
-            modelAndView = new ModelAndView(ConstUtil.ADMIN_REDIRECT_VIEW);
+            modelAndView = new ModelAndView(ConstUtil.INDEX_VIEW);
             session.setAttribute(ConstUtil.MODEL_TOKEN_ATTRIBUTE, result.getData().getToken());
             return modelAndView;
         } else {
