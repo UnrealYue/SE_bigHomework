@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2017-11-22 22:12:52
+Date: 2017-11-22 22:23:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,11 +20,19 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `dictionary`;
 CREATE TABLE `dictionary` (
-  `dict_id` int(11) NOT NULL,
+  `dict_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `dict_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `dict_describe` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`dict_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of dictionary
+-- ----------------------------
+INSERT INTO `dictionary` VALUES ('1', '酒店号码', '6666-6666666');
+INSERT INTO `dictionary` VALUES ('2', '酒店地址', '北京市解放大道一号');
+INSERT INTO `dictionary` VALUES ('3', '酒店介绍', '七星级大酒店');
+INSERT INTO `dictionary` VALUES ('4', '酒店介绍', '七星级大酒店');
 
 -- ----------------------------
 -- Table structure for guest
@@ -39,6 +47,10 @@ CREATE TABLE `guest` (
   `is_vip` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否为会员；否0，是1；',
   PRIMARY KEY (`guest_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of guest
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for order
@@ -63,6 +75,10 @@ CREATE TABLE `order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
+-- Records of order
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for order_room
 -- ----------------------------
 DROP TABLE IF EXISTS `order_room`;
@@ -81,6 +97,10 @@ CREATE TABLE `order_room` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
+-- Records of order_room
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for reservation
 -- ----------------------------
 DROP TABLE IF EXISTS `reservation`;
@@ -92,6 +112,10 @@ CREATE TABLE `reservation` (
   KEY `fk_reservation_order` (`order_id`),
   CONSTRAINT `fk_reservation_order` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of reservation
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for room
@@ -107,6 +131,10 @@ CREATE TABLE `room` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
+-- Records of room
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for users
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
@@ -117,6 +145,19 @@ CREATE TABLE `users` (
   `is_deleted` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of users
+-- ----------------------------
+INSERT INTO `users` VALUES ('1', 'admini', '123456', '0');
+INSERT INTO `users` VALUES ('2', 'liutianhong', '3F40BF80B59ABA195F745E2BCF37CE06', '1');
+INSERT INTO `users` VALUES ('3', '123456', 'EA48576F30BE1669971699C09AD05C94', '1');
+INSERT INTO `users` VALUES ('4', '123456', 'EA48576F30BE1669971699C09AD05C94', '1');
+INSERT INTO `users` VALUES ('5', '123456', 'EA48576F30BE1669971699C09AD05C94', '1');
+INSERT INTO `users` VALUES ('6', '123456', 'EA48576F30BE1669971699C09AD05C94', '1');
+INSERT INTO `users` VALUES ('7', '123456', 'EA48576F30BE1669971699C09AD05C94', '1');
+INSERT INTO `users` VALUES ('8', '123456', 'EA48576F30BE1669971699C09AD05C94', '1');
+INSERT INTO `users` VALUES ('9', 'liutianhong', '51A0151C91E25C09F78D1E36A76E7B88', '0');
 
 -- ----------------------------
 -- Table structure for vip
@@ -131,3 +172,7 @@ CREATE TABLE `vip` (
   KEY `fk_vip_guest` (`guest_id`),
   CONSTRAINT `fk_vip_guest` FOREIGN KEY (`guest_id`) REFERENCES `guest` (`guest_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of vip
+-- ----------------------------
