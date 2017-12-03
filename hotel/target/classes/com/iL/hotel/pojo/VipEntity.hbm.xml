@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.iL.hotel.pojo.VipEntity" table="vip" schema="hotel">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="birthday">
+            <column name="birthday" sql-type="date" not-null="true"/>
+        </property>
+        <property name="job">
+            <column name="job" sql-type="varchar(255)"/>
+        </property>
+        <property name="balance">
+            <column name="balance" sql-type="double(11) unsigned" precision="11"/>
+        </property>
+        <property name="totalCosts">
+            <column name="total_costs" sql-type="int(11) unsigned"/>
+        </property>
+        <many-to-one name="guestByGuestId" class="com.iL.hotel.pojo.GuestEntity">
+            <column name="guest_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

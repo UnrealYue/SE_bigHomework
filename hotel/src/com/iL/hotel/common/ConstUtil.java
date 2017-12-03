@@ -8,6 +8,17 @@ public class ConstUtil {
     //管理地址常量
     public static final String LOGIN = "/login";
     public static final String REGIST = "/regist";
+    public static final String VIP = "/VIP";
+    public static final String GetAllMembers = "/GetAllMembers";
+    public static final String AddVIP ="/AddVIP";
+    public static final String DeleteVIPs ="/deleteVIPs";
+    public static final String EditVIPs="/EditVIPs";
+    public static final String CheckedOrders="/CheckedOrders";
+    public static final String getCheckedOrdersInfo="/GetCheckedOrdersInfo";
+    public static final String checkOutByRoomID="/CheckOutByRoomID";
+    public static final String getTimeForCheckOut="/getTimeForCheckOut";
+    public static final String CheckOut="/CheckOut";
+    public static final String addOrderDays="/addOrderDays";
 
     //视图常量
     public static final String BASE_RESULT_NAME = "result";
@@ -39,4 +50,16 @@ public class ConstUtil {
     public static final String LOGIN_WRONG_PASSWORD = "账号/密码错误";
     public static final String HAVE_REGISTER = "账号已经被注册";
     public static final String REGISTER_SUCCESS = "注册成功";
+
+    //VIP常量
+    public static final String getAllVIPForShow="select g.isVip,g.guestId, g.guestName, g.gendar, g.idCard,g.phoneNum,v.balance,v.birthday,v.job,v.totalCosts from VipEntity v, GuestEntity g where g=v.guestByGuestId";
+    public static final String getVIPByGuestId="from VipEntity where  guestByGuestId.guestId =? ";
+    public static final String getGuestByGuestId="from GuestEntity  WHERE guestId =? ";
+    //Order常量
+    public static final String getOrderByOrderId="from OrderEntity  where orderId=?";
+    //Order_Room常量
+    public static final String getORByRoomIdList="from OrderRoomEntity where roomByRoomId.roomId=:rid ";
+    public static final String getCheckedOR="from OrderRoomEntity where orderByOrderId.isChecked=1 and orderByOrderId.isFinished=0 and orderByOrderId.isDeleted=0 ";
+    public static final String getORByOrderId="from OrderRoomEntity where orderByOrderId.orderId=? ";
+
 }

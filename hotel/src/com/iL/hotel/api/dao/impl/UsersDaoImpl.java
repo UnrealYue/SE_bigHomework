@@ -3,9 +3,13 @@ package com.iL.hotel.api.dao.impl;
 import com.iL.hotel.api.dao.UsersDao;
 import com.iL.hotel.common.ConstUtil;
 import com.iL.hotel.common.utils.HqlMapParameterSetter;
+import com.iL.hotel.common.utils.QueryParameterSetter;
 import com.iL.hotel.dao.HibernateBaseDao;
 import com.iL.hotel.dao.impl.HibernateBaseDaoImpl;
 import com.iL.hotel.pojo.Users;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -20,6 +24,7 @@ public class UsersDaoImpl extends HibernateBaseDaoImpl<Users,String> implements 
     private static final Logger log = LoggerFactory.getLogger(UsersDaoImpl.class);
     @Override
     public Users userLogin(String username, String password) {
+
         HqlMapParameterSetter parameterSetter = new HqlMapParameterSetter();
         parameterSetter.add(ConstUtil.DB_USERS_USERNAME,username);
         parameterSetter.add(ConstUtil.DB_USERS_PASSWORD,password);

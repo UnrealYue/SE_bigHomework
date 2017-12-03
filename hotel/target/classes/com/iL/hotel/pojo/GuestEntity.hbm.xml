@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.iL.hotel.pojo.GuestEntity" table="guest" schema="hotel">
+        <id name="guestId">
+            <column name="guest_id" sql-type="int(11)"/>
+        </id>
+        <property name="guestName">
+            <column name="guest_name" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="gendar">
+            <column name="gendar" sql-type="int(1)" not-null="true"/>
+        </property>
+        <property name="idCard">
+            <column name="id_card" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="phoneNum">
+            <column name="phone_num" sql-type="varchar(20)" length="20" not-null="true"/>
+        </property>
+        <property name="isVip">
+            <column name="is_vip" sql-type="tinyint(1) unsigned"/>
+        </property>
+        <set name="ordersByGuestId" inverse="true">
+            <key>
+                <column name="guest_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.iL.hotel.pojo.OrderEntity"/>
+        </set>
+        <set name="vipsByGuestId" inverse="true">
+            <key>
+                <column name="guest_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.iL.hotel.pojo.VipEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>

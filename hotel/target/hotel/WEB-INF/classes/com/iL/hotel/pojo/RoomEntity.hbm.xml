@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.iL.hotel.pojo.RoomEntity" table="room" schema="hotel">
+        <id name="roomId">
+            <column name="room_id" sql-type="int(5)"/>
+        </id>
+        <property name="rommType">
+            <column name="romm_type" sql-type="tinyint(2) unsigned"/>
+        </property>
+        <property name="roomPrice">
+            <column name="room_price" sql-type="smallint(6)"/>
+        </property>
+        <property name="roomState">
+            <column name="room_state" sql-type="tinyint(2)"/>
+        </property>
+        <property name="roomStyle">
+            <column name="room_style" sql-type="varchar(255)" not-null="false"/>
+        </property>
+        <set name="orderRoomsByRoomId" inverse="true">
+            <key>
+                <column name="room_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.iL.hotel.pojo.OrderRoomEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>

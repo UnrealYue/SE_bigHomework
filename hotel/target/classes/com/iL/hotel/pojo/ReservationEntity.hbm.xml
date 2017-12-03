@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.iL.hotel.pojo.ReservationEntity" table="reservation" schema="hotel">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="preCheckinTime">
+            <column name="pre_checkin_time" sql-type="datetime"/>
+        </property>
+        <property name="preStayDays">
+            <column name="pre_stay_days" sql-type="tinyint(2)"/>
+        </property>
+        <property name="guestNum">
+            <column name="guest_num" sql-type="tinyint(2) unsigned"/>
+        </property>
+        <many-to-one name="orderByOrderId" class="com.iL.hotel.pojo.OrderEntity">
+            <column name="order_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

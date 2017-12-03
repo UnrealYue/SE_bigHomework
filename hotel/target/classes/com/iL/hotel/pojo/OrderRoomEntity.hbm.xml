@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.iL.hotel.pojo.OrderRoomEntity" table="order_room" schema="hotel">
+        <id name="orderRoomId">
+            <column name="order_room_id" sql-type="int(11)"/>
+        </id>
+        <property name="checkinTime">
+            <column name="checkin_time" sql-type="datetime"/>
+        </property>
+        <property name="checkoutTime">
+            <column name="checkout_time" sql-type="datetime" not-null="true"/>
+        </property>
+        <property name="notes">
+            <column name="notes" sql-type="varchar(255)" not-null="false"/>
+        </property>
+        <many-to-one name="orderByOrderId" cascade="all" lazy="false" class="com.iL.hotel.pojo.OrderEntity">
+            <column name="order_id"/>
+        </many-to-one>
+        <many-to-one name="roomByRoomId"  cascade="all" lazy="false" class="com.iL.hotel.pojo.RoomEntity">
+            <column name="room_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

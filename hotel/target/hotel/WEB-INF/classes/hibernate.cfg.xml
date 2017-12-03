@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:mysql://localhost:3306/hotel</property>
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">slpb</property>
+
+    <mapping resource="com/iL/hotel/pojo/GuestEntity.hbm.xml"/>
+      <mapping class="com.iL.hotel.pojo.GuestEntity"/>
+      <mapping class="com.iL.hotel.pojo.OrderEntity"/>
+      <mapping resource="com/iL/hotel/pojo/OrderEntity.hbm.xml"/>
+      <mapping class="com.iL.hotel.pojo.OrderRoomEntity"/>
+      <mapping resource="com/iL/hotel/pojo/OrderRoomEntity.hbm.xml"/>
+      <mapping class="com.iL.hotel.pojo.ReservationEntity"/>
+      <mapping resource="com/iL/hotel/pojo/ReservationEntity.hbm.xml"/>
+      <mapping class="com.iL.hotel.pojo.RoomEntity"/>
+      <mapping resource="com/iL/hotel/pojo/RoomEntity.hbm.xml"/>
+
+      <mapping class="com.iL.hotel.pojo.VipEntity"/>
+      <mapping resource="com/iL/hotel/pojo/VipEntity.hbm.xml"/>
+
+
+      <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>
