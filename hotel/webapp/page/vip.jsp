@@ -50,10 +50,10 @@
                 }
                 $('#guestId').attr("disabled",true);
                 $('#exampleModalLabel').text("会员修改");
-                $('#guestId').attr("value",rows[0]['1']);
-                $('#birthday').attr("value",rows[0]['7']);
-                $('#job').attr("value",rows[0]['8']);
-                $('#balance').attr("value",rows[0]['6']);
+                $('#guestId').attr("value",rows[0]['guestId']);
+                $('#birthday').attr("value",rows[0]['birthday']);
+                $('#job').attr("value",rows[0]['job']);
+                $('#balance').attr("value",rows[0]['balance']);
                 $('#exampleModal').modal('show');
 
             });
@@ -70,6 +70,24 @@
             });
 
             $("#subTable").click(function sub() {
+                var id =$('#guestId').val();
+                if(id<0||id>9999999999||id.length==0){
+                    alert("id错误");
+                    return ;
+                }
+                if($('#birthday').val().length==0){
+                    alert("生日错误");
+                    return ;
+                }
+                if($('#job').val().length==0){
+                    alert("职业错误");
+                    return ;
+                }
+                if($('#balance').val()<0||$('#balance').val()>9999999999||$('#balance').val().length==0){
+                    alert("余额错误");
+                    return ;
+                }
+
 
                 if(flag==0){
                     $.ajax({
@@ -83,6 +101,10 @@
                             //重新加载数据
                             $('#exampleModal').modal('hide');
                             $("#VIP_table").bootstrapTable('refresh');
+                        },
+                        error: function () {
+                            alert("错误，请检查id是否存在");
+                            return ;
                         }
                     });
                 }
@@ -91,7 +113,7 @@
 
                     var dataaa=new Array() ;
                     for (var i = 0; i < rows.length; i++) {
-                        dataaa[i] = rows[i]['1'];
+                        dataaa[i] = rows[i]['guestId'];
                     }
                     editUser(dataaa);
 
@@ -131,7 +153,7 @@
                     }
                     var dataaa=new Array() ;
                     for (var i = 0; i < rows.length; i++) {
-                        dataaa[i] = rows[i]['1'];
+                        dataaa[i] = rows[i]['guestId'];
                     }
 
                     deleteUser(dataaa);
@@ -168,7 +190,7 @@
 <div class="col-md-offset-3  col-md-6">
     <div class="card" >
         <div class="panel-heading">
-            <h3 class="card-title text-center"style="font-family: 等线;font-size: xx-large">VIP管理</h3>
+            <h3  id="vipTitle" class="card-title text-center"style="font-family: 等线;font-size: xx-large">VIP管理</h3>
         </div>
         <div class="card-body">
             <div id="toolbar" class="btn-group">
@@ -196,15 +218,15 @@
 <thead>
 <tr>
   <th data-checkbox="true" data-field="false"></th>
-  <th data-field="1">会员ID</th>
-  <th data-field="2">姓名</th>
-  <th data-field="3">性别</th>
-  <th data-field="4">身份证号</th>
-  <th data-field="5">电话</th>
-  <th data-field="6">余额</th>
-  <th data-field="7">生日</th>
-  <th data-field="8">职业</th>
-  <th data-field="9">累计消费</th>
+  <th data-field="guestId">会员ID</th>
+  <th data-field="guestName">姓名</th>
+  <th data-field="gendar">性别</th>
+  <th data-field="idCard">身份证号</th>
+  <th data-field="phoneNum">电话</th>
+  <th data-field="balance">余额</th>
+  <th data-field="birthday">生日</th>
+  <th data-field="job">职业</th>
+  <th data-field="totalCosts">累计消费</th>
 </tr>
 </thead>
 </table>
@@ -226,7 +248,7 @@
 
   <div id="guestIdINPUT" class="form-group">
       <label for="guestId">顾客ID</label>
-      <input type="number" class="form-control" name="guestId" id="guestId">
+      <input type="number" class="form-control" name="guestId" id="guestId" min="0" max="9999999999999">
   </div>
 
   <div class="form-group">
@@ -236,20 +258,20 @@
 
   <div class="form-group">
       <label for="job">职业</label>
-      <input type="text" class="form-control" name="job" id="job">
+      <input type="text" class="form-control" name="job" id="job"maxlength="20">
   </div>
 
   <div class="form-group">
       <label for="balance">余额</label>
-      <input type="number" class="form-control" name="balance" id="balance" min="0">
+      <input type="number" class="form-control" name="balance" id="balance" min="0" max="9999999999999">
   </div>
 
 
 </form>
 </div>
 <div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-<button id="subTable" type="button" class="btn btn-primary "  >Send message</button>
+<button type="button" id="exit" class="btn btn-secondary" data-dismiss="modal">取消</button>
+<button id="subTable" type="button" class="btn btn-primary "  >提交</button>
 </div>
 </div>
 </div>

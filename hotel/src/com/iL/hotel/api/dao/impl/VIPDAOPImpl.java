@@ -1,6 +1,9 @@
 package com.iL.hotel.api.dao.impl;
 
 import com.iL.hotel.api.dao.VIPDAO;
+import com.iL.hotel.common.utils.HqlMapParameterSetter;
+import com.iL.hotel.dao.HibernateBaseDao;
+import com.iL.hotel.dao.impl.HibernateBaseDaoImpl;
 import com.iL.hotel.pojo.VIPForShow;
 import com.iL.hotel.pojo.GuestEntity;
 import com.iL.hotel.pojo.VipEntity;
@@ -9,89 +12,32 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import  com.iL.hotel.common.ConstUtil;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-public class VIPDAOPImpl implements VIPDAO {
-    static Configuration configuration = new Configuration().configure();
-    static SessionFactory factory = configuration.buildSessionFactory();
+@Repository
+@Transactional
+public class VIPDAOPImpl  extends HibernateBaseDaoImpl<VipEntity,Integer> implements VIPDAO {
     @Override
-    public List<VIPForShow> getAllVIPsForShow() {
-        Session session = factory.openSession();
-        String hql = ConstUtil.getAllVIPForShow;
-        Query query = session.createQuery(hql);
-        return (List<VIPForShow>)query.list();
+    public List<VipEntity> getAllVIPsForShow() {
+        return (List<VipEntity>)this.findAll();
     }
     @Override
-    public VipEntity getVIP(Integer id) {
-        String hql = ConstUtil.getVIPByGuestId;
-        Session session=factory.openSession();
-        List<VipEntity> list =session.createQuery(hql).setParameter(0,id).list();
-        return list.get(0);
-    }
-    @Override
-    public void addVIP(int guestId, Date birthday, String job, double balance) {
-        Session session = factory.openSession();
-            GuestEntity guestEntity=(GuestEntity)session.load(GuestEntity.class,guestId);
-            guestEntity.setIsVip((byte)1);
-            session.clear();
-            session.beginTransaction();
-            session.update(guestEntity);
-            session.getTransaction().commit();
-            VipEntity vipEntity=new VipEntity();
-            vipEntity.setBalance(balance);
-            vipEntity.setBirthday(birthday);
-            vipEntity.setJob(job);
-            vipEntity.setTotalCosts(0);
-            vipEntity.setGuestByGuestId(guestEntity);
-            session.clear();
-            session.beginTransaction();
-            session.save(vipEntity);
-            session.getTransaction().commit();
-
-    }
-
-    @Override
-    public void editVIP(Integer ids, java.sql.Date birthday, String job, double balance) {
-        String hql = ConstUtil.getVIPByGuestId;
-        Session session=factory.openSession();
-        List<VipEntity> list =session.createQuery(hql).setParameter(0,ids).list();
-        for(VipEntity a:list){
-            VipEntity vipEntity=(VipEntity) session.load(VipEntity.class,a.getId());
-            vipEntity.setBirthday(birthday);
-            vipEntity.setJob(job);
-            vipEntity.setBalance(balance);
-            session.clear();
-            session.beginTransaction();
-            session.update(vipEntity);
-            session.getTransaction().commit();
+    public List<VipEntity> getVIPs(Integer[] id) {
+        List<VipEntity> vipEntities=new ArrayList<VipEntity>();
+        for(Integer a:id){
+            HqlMapParameterSetter parameterSetter=new HqlMapParameterSetter();
+            parameterSetter.add("gid",a);
+            vipEntities.add((VipEntity)this.findAll(ConstUtil.GET_VIP_BYGUESTID,parameterSetter.getParamMap()).get(0));
         }
+        return  vipEntities;
     }
-
-
     @Override
-    public void deleteVIP(Integer id) {
-        Session session=factory.openSession();
-        String hql = ConstUtil.getGuestByGuestId;
-        List<GuestEntity> list =session.createQuery(hql).setParameter(0,id).list();
-        for(GuestEntity a:list){
-            GuestEntity guestEntity=(GuestEntity)session.load(GuestEntity.class,a.getGuestId());
-            guestEntity.setIsVip((byte)0);
-            session.clear();
-            session.beginTransaction();
-            session.update(guestEntity);
-            session.getTransaction().commit();
-        }
-        String hql1 = ConstUtil.getVIPByGuestId;
-        List<VipEntity> v=session.createQuery(hql1).setParameter(0, id).list();
-        for(VipEntity k : v) {
-            VipEntity bb = (VipEntity) session.load(VipEntity.class, k.getId());
-            session.clear();
-            session.beginTransaction();
-            session.delete(bb);
-            session.getTransaction().commit();
-        }
+    public void addVIP(VipEntity vipEntity) {
+        this.save(vipEntity);
     }
-
 
 }

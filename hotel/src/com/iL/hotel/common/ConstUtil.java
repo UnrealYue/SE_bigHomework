@@ -9,16 +9,16 @@ public class ConstUtil {
     public static final String LOGIN = "/login";
     public static final String REGIST = "/regist";
     public static final String VIP = "/VIP";
-    public static final String GetAllMembers = "/GetAllMembers";
-    public static final String AddVIP ="/AddVIP";
-    public static final String DeleteVIPs ="/deleteVIPs";
-    public static final String EditVIPs="/EditVIPs";
-    public static final String CheckedOrders="/CheckedOrders";
-    public static final String getCheckedOrdersInfo="/GetCheckedOrdersInfo";
-    public static final String checkOutByRoomID="/CheckOutByRoomID";
-    public static final String getTimeForCheckOut="/getTimeForCheckOut";
-    public static final String CheckOut="/CheckOut";
-    public static final String addOrderDays="/addOrderDays";
+    public static final String GET_ALL_MEMBERS = "/GetAllMembers";
+    public static final String ADD_VIP ="/AddVIP";
+    public static final String DELETE_VIPS ="/deleteVIPs";
+    public static final String EDIT_VIPS="/EditVIPs";
+    public static final String CHECKED_ORDERS="/CheckedOrders";
+    public static final String GET_CHECKEDORDERS_INFO="/GetCheckedOrdersInfo";
+    public static final String CHECKOUT_BY_ROOMID="/CheckOutByRoomID";
+    public static final String GET_TIME_FOR_CHECKOUT="/getTimeForCheckOut";
+    public static final String CHECKOUT="/CheckOut";
+    public static final String ADD_ORDERDAYS="/addOrderDays";
 
     //视图常量
     public static final String BASE_RESULT_NAME = "result";
@@ -52,14 +52,13 @@ public class ConstUtil {
     public static final String REGISTER_SUCCESS = "注册成功";
 
     //VIP常量
-    public static final String getAllVIPForShow="select g.isVip,g.guestId, g.guestName, g.gendar, g.idCard,g.phoneNum,v.balance,v.birthday,v.job,v.totalCosts from VipEntity v, GuestEntity g where g=v.guestByGuestId";
-    public static final String getVIPByGuestId="from VipEntity where  guestByGuestId.guestId =? ";
-    public static final String getGuestByGuestId="from GuestEntity  WHERE guestId =? ";
+    public static final String GET_VIP_BYGUESTID="from VipEntity where  guestByGuestId.guestId =:gid ";
+    public static final String GET_GUEST_BYGUESTID="from GuestEntity  WHERE guestId = :gid ";
     //Order常量
-    public static final String getOrderByOrderId="from OrderEntity  where orderId=?";
+    public static final String GET_ORDER_BYORDERID="from OrderEntity  where orderId=:orderID";
     //Order_Room常量
-    public static final String getORByRoomIdList="from OrderRoomEntity where roomByRoomId.roomId=:rid ";
-    public static final String getCheckedOR="from OrderRoomEntity where orderByOrderId.isChecked=1 and orderByOrderId.isFinished=0 and orderByOrderId.isDeleted=0 ";
-    public static final String getORByOrderId="from OrderRoomEntity where orderByOrderId.orderId=? ";
+    //public static final String GET_OR_BYROOMIDLIST="from OrderRoomEntity where roomByRoomId.roomId=:rid ";
+    public static final String GET_CHECKEDOR="from OrderRoomEntity where orderByOrderId.isChecked=:a and orderByOrderId.isFinished=:b and orderByOrderId.isDeleted=:c ";
+    public static final String GET_OR_BYORDERID="from OrderRoomEntity where orderByOrderId.orderId=:orderID ";
 
 }

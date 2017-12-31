@@ -26,6 +26,7 @@ public class CheckedOrderInfoForShow {
         this.orderEntity = orderEntity;
         this.orderEntity.setGuestByGuestId(null);
         this.orderEntity.setOrderRoomsByOrderId(null);
+        this.orderEntity.setReservationsByOrderId(null);
         this.guestEntity = guestEntity;
         this.guestEntity.setOrdersByGuestId(null);
         this.guestEntity.setVipsByGuestId(null);

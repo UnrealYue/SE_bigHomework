@@ -21,34 +21,35 @@ import java.util.List;
 
 import static com.iL.hotel.common.ConstUtil.*;
 @Controller
-@RequestMapping(CheckedOrders)
+@RequestMapping(CHECKED_ORDERS)
 public class CheckedOrderController {
     @Autowired
     private CheckedOrderService checkedOrderService;
 
-    @RequestMapping(getCheckedOrdersInfo)
+    @RequestMapping(GET_CHECKEDORDERS_INFO)
     @ResponseBody
     public List<CheckedOrderInfoForShow> getCheckedOrdersInfo(){
         ModelAndView modelAndView=new ModelAndView("/page/checkedOrders.jsp");
-        return   checkedOrderService.getCheckedOrderInfo();
+        List<CheckedOrderInfoForShow> checkedOrderInfoForShowList=checkedOrderService.getCheckedOrderInfo();
+        return   checkedOrderInfoForShowList;
     }
 
 
-    @RequestMapping(getTimeForCheckOut)
+    @RequestMapping(GET_TIME_FOR_CHECKOUT)
     @ResponseBody
     public String getCheckOutTime(){
         DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(new java.sql.Timestamp(new Date().getTime())) ;
     }
 
-    @RequestMapping(CheckOut)
+    @RequestMapping(CHECKOUT)
     public ModelAndView checkOut(Integer ids, String DATE, Integer method,String note){
 
         checkedOrderService.checkOut(ids, Timestamp.valueOf(DATE),method,note);
         return new ModelAndView("/page/checkedOrders.jsp");
     }
 
-@RequestMapping(addOrderDays)
+@RequestMapping(ADD_ORDERDAYS)
     public ModelAndView addOrderDays(Integer id,Integer days){
     checkedOrderService.addOrderDays(id, days);
     return new ModelAndView("/page/checkedOrders.jsp");

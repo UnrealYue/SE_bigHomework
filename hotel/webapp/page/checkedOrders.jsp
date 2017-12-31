@@ -113,6 +113,10 @@
             });
 
             $('#addDaysConfirm').click(function () {
+                if($('#addDays').val().length==0||$('#addDays').val()<1||$('#addDays').val()>20){
+                    alert("天数错误");
+                    return;
+                }
                 $.ajax({
                     url: "/CheckedOrders/addOrderDays",
                     type: "post",
@@ -260,10 +264,8 @@ data-single-select="true">
                     </div>
 
                     <div  class="form-group">
-
                             <label for="note">备注</label>
-                            <input type="text" class="form-control" name="note" id="note" >
-
+                            <input type="text" class="form-control" name="note" id="note" maxlength="20">
                     </div>
 
                     <div  class="form-group">
